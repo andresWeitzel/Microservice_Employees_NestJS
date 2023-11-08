@@ -3,20 +3,22 @@ import {
   BaseEntity,
   Column,
   CreateDateColumn,
+  Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 //enums
 import { Gender } from "../enums/Gender";
 
+@Entity({ name: 'employees' })  
 export class Employee extends BaseEntity {
   @PrimaryGeneratedColumn("increment", { type: "bigint" })
   id: number;
 
-  @Column({ name: "name", type: "string", length: 40, nullable: false })
+  @Column({ name: "name", length: 40, nullable: false })
   name: string;
 
-  @Column({ name: "lastname", type: "string", length: 40, nullable: false })
+  @Column({ name: "lastname", length: 40, nullable: false })
   lastname: string;
 
   @Column({ name: "age", type: "int", nullable: false })
@@ -31,16 +33,16 @@ export class Employee extends BaseEntity {
   })
   gender: Gender;
 
-  @Column({ name: "doc_type", type: "string", length: 17, nullable: false })
+  @Column({ name: "doc_type", length: 17, nullable: false })
   docType: string;
 
-  @Column({ name: "doc_number", type: "string", length: 15, nullable: false })
+  @Column({ name: "doc_number", length: 15, nullable: false })
   docNumber: string;
 
-  @Column({ name: "email", type: "string", length: 50, nullable: false })
+  @Column({ name: "email", length: 50, nullable: false })
   email: string;
 
-  @Column({ name: "phone_number", type: "string", length: 25, nullable: false })
+  @Column({ name: "phone_number", length: 25, nullable: false })
   phoneNumber: string;
 
   @Column({ name: "start_date", type: "date", nullable: false })

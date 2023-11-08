@@ -1,12 +1,17 @@
-import { Module } from '@nestjs/common';
-import { EmployeesService } from './employees.service';
-import { EmployeesController } from './employees.controller';
-import { DatabaseModule } from 'src/database/database.module';
-import { EmployeesProviders } from './employees.providers';
+import { Module } from "@nestjs/common";
+import { DatabaseModule } from "src/database/database.module";
+import { EmployeesProviders } from "./employees.providers";
+import { GetAllEmployeesService } from "./services/get-all.service";
+import { GetAllEmployeesController } from "./controllers/get-all.controller";
 
 @Module({
   imports: [DatabaseModule],
-  providers: [...EmployeesProviders,EmployeesService],
-  controllers: [EmployeesController]
+  providers: [
+    //Providers
+    ...EmployeesProviders,
+    //Services
+    GetAllEmployeesService,
+  ],
+  controllers: [GetAllEmployeesController],
 })
 export class EmployeesModule {}

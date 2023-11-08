@@ -1,11 +1,11 @@
 import { Injectable, Inject } from "@nestjs/common";
-import { CreateEmployeeDto } from "./dto/create-employee.dto";
-import { UpdateEmployeeDto } from "./dto/update-employee.dto";
-import { Employee } from "./entities/employee.entity";
+import { CreateEmployeeDto } from ".././dto/create-employee.dto";
+import { UpdateEmployeeDto } from ".././dto/update-employee.dto";
+import { Employee } from ".././entities/employee.entity";
 import { Repository } from "typeorm";
 
 @Injectable()
-export class EmployeesService {
+export class GetAllEmployeesService {
   constructor(
     @Inject("EMPLOYEES_REPOSITORY")
     private employeeRepository: Repository<Employee>
@@ -30,11 +30,11 @@ export class EmployeesService {
   //   return `This action removes a #${id} employee`;
   // }
 
-  async getAllEmployees(): Promise<Employee[]> {
+  async getAll(): Promise<Employee[]> {
     try {
       return await this.employeeRepository.find({});
     } catch (error) {
-      console.log(`Error in getAllEmployees service. Caused by ${error}`);
+      console.log(`Error in getAll frunction for GetAllEmployeesService class. Caused by ${error}`);
     }
   }
 }
