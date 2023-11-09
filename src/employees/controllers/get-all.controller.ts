@@ -1,54 +1,39 @@
-import {
-    Controller,
-    Get,
-    Post,
-    Body,
-    Patch,
-    Param,
-    Delete,
-  } from "@nestjs/common";
-  import { GetAllEmployeesService } from "../services/get-all.service";
-  import { CreateEmployeeDto } from ".././dto/create-employee.dto";
-  import { UpdateEmployeeDto } from ".././dto/update-employee.dto";
-  import { Employee } from ".././entities/employee.entity";
+import { Controller, Get } from "@nestjs/common";
+import { GetAllEmployeesService } from "../services/get-all.service";
+import { Employee } from ".././entities/employee.entity";
 
-  
-  @Controller("employees")
-  export class GetAllEmployeesController {
-    constructor(private readonly getAllEmployeesService: GetAllEmployeesService) {}
-  
-    // @Post()
-    // create(@Body() createEmployeeDto: CreateEmployeeDto) {
-    //   return this.employeesService.create(createEmployeeDto);
-    // }
-  
-    // @Get()
-    // findAll() {
-    //   return this.employeesService.findAll();
-    // }
-  
-    // @Get(':id')
-    // findOne(@Param('id') id: string) {
-    //   return this.employeesService.findOne(+id);
-    // }
-  
-    // @Patch(':id')
-    // update(@Param('id') id: string, @Body() updateEmployeeDto: UpdateEmployeeDto) {
-    //   return this.employeesService.update(+id, updateEmployeeDto);
-    // }
-  
-    // @Delete(':id')
-    // remove(@Param('id') id: string) {
-    //   return this.employeesService.remove(+id);
-    // }
-  
-    @Get("/list")
-    async getAllEmployees(): Promise<Employee[]> {
-      try {
-        return await this.getAllEmployeesService.getAll();
-      } catch (error) {
-        console.log(`Error in getAllEmployees ontroller. Caused by ${error}`);
-      }
+@Controller("employees")
+export class GetAllEmployeesController {
+  constructor(
+    private readonly getAllEmployeesService: GetAllEmployeesService
+  ) {}
+
+  /**
+   * @description Controller function to get a paginated listing of all employees.
+   * @param {number} pageNro number type
+   * @param {number} pageSize number type
+   * @param {string} orderBy string type
+   * @param {string} orderAt string type
+   * @returns an object with the employees paginated list
+   */
+  @Get("/list")
+  async getAll(
+    pageNro: number,
+    pageSize: number,
+    orderBy: string,
+    orderAt: string
+  ): Promise<Employee[]> {
+    try {
+      return await this.getAllEmployeesService.findAll(
+        pageNro,
+        pageSize,
+        orderBy,
+        orderAt
+      );
+    } catch (error) {
+      console.log(
+        `Error in getAll function for  GetAllEmployeesController class. Caused by ${error}`
+      );
     }
   }
-  
+}
