@@ -11,40 +11,41 @@ export class GetAllEmployeesService {
 
   /**
    * @description Service to get a paginated listing of all employees
-   * @param {number} pageNro number type
-   * @param {number} pageSize number type
-   * @param {string} orderBy string type
-   * @param {string} orderAt string type
+   * @param {number} pageNroParam number type
+   * @param {number} pageSizeParam number type
+   * @param {string} orderByParam string type
+   * @param {string} orderAtParam string type
    * @returns an object with the products paginated list
    */
   async findAll(
-    pageNro: number,
-    pageSize: number,
-    orderBy: string,
-    orderAt: string
+    pageNroParam: number,
+    pageSizeParam: number,
+    orderByParam: string,
+    orderAtParam: string
   ): Promise<Employee[]> {
     try {
-      let pageNroParam = 0;
-      let pageSizeParam = 20;
-      let orderByParam = "id";
-      let orderAtParam = "ASC";
+      let pageNro = 0;
+      let pageSize = 20;
+      let orderBy = "id";
+      let orderAt = "ASC";
 
-      pageNroParam = pageNro != (null || undefined) ? pageNro : pageNroParam;
-      pageSizeParam =
-        pageSize != (null || undefined) ? pageSize : pageSizeParam;
-      orderByParam = orderBy != (null || undefined) ? orderBy : orderByParam;
-      orderAtParam = orderAt != (null || undefined) ? orderAt : orderAtParam;
+      pageNroParam =
+        pageNroParam != (null || undefined) ? pageNroParam : pageNro;
+      pageSize =
+        pageSizeParam != (null || undefined) ? pageSizeParam : pageSize;
+      orderBy = orderByParam != (null || undefined) ? orderByParam : orderBy;
+      orderAt = orderAtParam != (null || undefined) ? orderAtParam : orderAt;
 
       return await this.employeeRepository.find({
         order: {
-          [orderBy]: orderAt,
+          [orderBy]: orderAtParam,
         },
-        skip: pageNro,
-        take: pageSize,
+        skip: pageNroParam,
+        take: pageSizeParam,
       });
     } catch (error) {
       console.log(
-        `Error in findAll frunction for GetAllEmployeesService class. Caused by ${error}`
+        `Error in findAll function for GetAllEmployeesService class. Caused by ${error}`
       );
     }
   }

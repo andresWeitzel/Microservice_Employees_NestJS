@@ -1,4 +1,4 @@
-import { Controller, Get } from "@nestjs/common";
+import { Controller, Get, Query } from "@nestjs/common";
 import { GetAllEmployeesService } from "../services/get-all.service";
 import { Employee } from ".././entities/employee.entity";
 
@@ -10,25 +10,25 @@ export class GetAllEmployeesController {
 
   /**
    * @description Controller function to get a paginated listing of all employees.
-   * @param {number} pageNro number type
-   * @param {number} pageSize number type
-   * @param {string} orderBy string type
-   * @param {string} orderAt string type
+   * @param {number} pageNroParam number type
+   * @param {number} pageSizeParam number type
+   * @param {string} orderByParam string type
+   * @param {string} orderAtParam string type
    * @returns an object with the employees paginated list
    */
   @Get("/list")
   async getAll(
-    pageNro: number,
-    pageSize: number,
-    orderBy: string,
-    orderAt: string
+    @Query('pageNro') pageNroParam: number,
+    @Query('pageSize') pageSizeParam: number,
+    @Query('orderBy') orderByParam: string,
+    @Query('orderAt') orderAtParam: string,
   ): Promise<Employee[]> {
     try {
       return await this.getAllEmployeesService.findAll(
-        pageNro,
-        pageSize,
-        orderBy,
-        orderAt
+        pageNroParam,
+        pageSizeParam,
+        orderByParam,
+        orderAtParam
       );
     } catch (error) {
       console.log(
