@@ -1,11 +1,11 @@
-import { Controller, Get, Query } from "@nestjs/common";
-import { GetAllEmployeesService } from "../services/get-all.service";
-import { Employee } from ".././entities/employee.entity";
+import { Controller, Get, Query } from '@nestjs/common';
+import { GetAllEmployeesService } from '../services/get-all.service';
+import { Employee } from '.././entities/employee.entity';
 
-@Controller("employees")
+@Controller('employees')
 export class GetAllEmployeesController {
   constructor(
-    private readonly getAllEmployeesService: GetAllEmployeesService
+    private readonly getAllEmployeesService: GetAllEmployeesService,
   ) {}
 
   /**
@@ -16,7 +16,7 @@ export class GetAllEmployeesController {
    * @param {string} orderAtParam string type
    * @returns an object with the employees paginated list
    */
-  @Get("/list")
+  @Get('/list')
   async getAll(
     @Query('pageNro') pageNroParam: number,
     @Query('pageSize') pageSizeParam: number,
@@ -28,11 +28,11 @@ export class GetAllEmployeesController {
         pageNroParam,
         pageSizeParam,
         orderByParam,
-        orderAtParam
+        orderAtParam,
       );
     } catch (error) {
       console.log(
-        `Error in getAll function for  GetAllEmployeesController class. Caused by ${error}`
+        `Error in getAll function for  GetAllEmployeesController class. Caused by ${error}`,
       );
     }
   }

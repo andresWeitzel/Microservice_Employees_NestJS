@@ -1,12 +1,12 @@
-import { Injectable, Inject } from "@nestjs/common";
-import { Employee } from ".././entities/employee.entity";
-import { Repository } from "typeorm";
+import { Injectable, Inject } from '@nestjs/common';
+import { Employee } from '.././entities/employee.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class GetAllEmployeesService {
   constructor(
-    @Inject("EMPLOYEES_REPOSITORY")
-    private employeeRepository: Repository<Employee>
+    @Inject('EMPLOYEES_REPOSITORY')
+    private employeeRepository: Repository<Employee>,
   ) {}
 
   /**
@@ -21,13 +21,13 @@ export class GetAllEmployeesService {
     pageNroParam: number,
     pageSizeParam: number,
     orderByParam: string,
-    orderAtParam: string
+    orderAtParam: string,
   ): Promise<Employee[]> {
     try {
       let pageNro = 0;
       let pageSize = 20;
-      let orderBy = "id";
-      let orderAt = "ASC";
+      let orderBy = 'id';
+      let orderAt = 'ASC';
 
       pageNroParam =
         pageNroParam != (null || undefined) ? pageNroParam : pageNro;
@@ -45,7 +45,7 @@ export class GetAllEmployeesService {
       });
     } catch (error) {
       console.log(
-        `Error in findAll function for GetAllEmployeesService class. Caused by ${error}`
+        `Error in findAll function for GetAllEmployeesService class. Caused by ${error}`,
       );
     }
   }

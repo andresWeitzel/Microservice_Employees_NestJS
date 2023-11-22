@@ -1,12 +1,12 @@
-import { Controller, Get, Param } from "@nestjs/common";
+import { Controller, Get, Param } from '@nestjs/common';
 
-import { Employee } from ".././entities/employee.entity";
-import { GetByIdEmployeesService } from "../services/get-by-id.service";
+import { Employee } from '.././entities/employee.entity';
+import { GetByIdEmployeesService } from '../services/get-by-id.service';
 
-@Controller("employees")
+@Controller('employees')
 export class GetByIdEmployeesController {
   constructor(
-    private readonly getByIdEmployeesService: GetByIdEmployeesService
+    private readonly getByIdEmployeesService: GetByIdEmployeesService,
   ) {}
 
   /**
@@ -16,15 +16,13 @@ export class GetByIdEmployeesController {
    */
   @Get('/id/:inputIdParam')
   async getById(
-    @Param('inputIdParam') inputIdParam: number
+    @Param('inputIdParam') inputIdParam: number,
   ): Promise<Employee> {
     try {
-      return await this.getByIdEmployeesService.findById(
-        inputIdParam
-      );
+      return await this.getByIdEmployeesService.findById(inputIdParam);
     } catch (error) {
       console.log(
-        `Error in getById function for  GetByIdEmployeesController class. Caused by ${error}`
+        `Error in getById function for  GetByIdEmployeesController class. Caused by ${error}`,
       );
     }
   }
